@@ -20,26 +20,30 @@ rupee = 1
 print('')
 time.sleep(1)
 
+rechts_of_rechtdoor = input('Wil je rechts of rechtdoor? ')
+
+
 # === [kamer 2] === #
-print('Je stapt door de deur heen en je ziet een standbeeld voor je.')
-print('Het standbeeld heeft een sleutel vast.')
-print('Op zijn borst zit een numpad met de toetsen 9 t/m 0.')
-getal1 = random.randint(10, 25)
-getal2 = random.randint(-5, 75)
-som = f'{getal1} + {getal2}'
-antwoord_som = getal1 + getal2
-print(f'Daarboven zie je een som staan {som} = ?')
-antwoord = int(input('Wat toets je in? '))
+if rechts_of_rechtdoor == "rechts":
+    print('Je stapt door de deur heen en je ziet een standbeeld voor je.')
+    print('Het standbeeld heeft een sleutel vast.')
+    print('Op zijn borst zit een numpad met de toetsen 9 t/m 0.')
+    getal1 = random.randint(10, 25)
+    getal2 = random.randint(-5, 75)
+    som = f'{getal1} + {getal2}'
+    antwoord_som = getal1 + getal2
+    print(f'Daarboven zie je een som staan {som} = ?')
+    antwoord = int(input('Wat toets je in? '))
 
-if antwoord == antwoord_som:
-    print('Het standbeeld laat de sleutel vallen en je pakt het op')
-else:
-    print('Er gebeurt niets....')
+    if antwoord == antwoord_som:
+        print('Het standbeeld laat de sleutel vallen en je pakt het op')
+    else:
+        print('Er gebeurt niets....')
 
-print('Je ziet een deur achter het standbeeld.')
-print('')
-time.sleep(1)
-
+    print('Je ziet een deur achter het standbeeld.')
+    print('')
+    time.sleep(1)
+    
 dekamerkeuze = input("Wil jij naar kamer 3 of naar kamer 6? ")
 
 # === [kamer 6] === #
@@ -69,13 +73,16 @@ if dekamerkeuze == 'kamer 6':
             exit()
 
 # === [kamer 3] === #
-
 print('Je hebt een rupee.')
-item_antwoord = input('Wil je met de rupee een zwaard of een schild kopen?  ')
+item_antwoord = input('Wil je met de rupee een zwaard of een schild kopen? ')
 if item_antwoord == "zwaard":
-    player_attack += 2
+        player_attack += 2
 elif item_antwoord == "schild":
-    player_defense += 1
+        player_defense += 1
+
+elif rechts_of_rechtdoor == "rechtdoor":
+    dekamerkeuze = "kamer 3"
+    
 
 elif dekamerkeuze == 'kamer 3':
     print('Je duwt hem open en stapt een hele lange kamer binnen.')
