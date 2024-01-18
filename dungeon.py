@@ -65,28 +65,39 @@ if links_of_rechtdoor == "links":
     zombie_attack = 1
     zombie_defense = 0
     zombie_health = 2
+
     print(f'Dapper met je handen loop je de kamer binnen.')
     print('Je loopt tegen een zombie aan.')
 
-    zombie_hit_damage = (zombie_attack - player_defense)
+    zombie_hit_damage = max(1, zombie_attack - player_defense)
+
     if zombie_hit_damage <= 0:
         print('Jij hebt een te goede verdediging voor de zombie, hij kan je geen schade doen.')
     else:
         zombie_attack_amount = math.floor(player_health / zombie_hit_damage)
-
-        player_hit_damage = (player_attack - zombie_defense)
+        player_hit_damage = max(1, player_attack - zombie_defense)
         player_attack_amount = math.floor(zombie_health / player_hit_damage)
 
-    if player_attack_amount < zombie_attack_amount:
-        print(f'In {player_attack_amount} rondes versla je de zombie.')
-        print(f'Je health is nu {player_health}.')
-    else:
-        print('Helaas is de zombie te sterk voor je.')
-        print('Game over.')
-        exit()
-    print('')
-    time.sleep(1)
-    dekamerkeuze = input('Wil je door naar kamer 3? (ja/nee)')
+        if player_attack_amount < zombie_attack_amount:
+            print(f'In {player_attack_amount} rondes versla je de zombie.')
+            print(f'Je health is nu {player_health}.')
+            
+            
+            print('Je hebt de zombie verslagen en vindt een dolk!')
+            player_attack += 1  
+            item = 'dolk'
+            
+            if item == 'zwaard':
+                print('Je hebt nu zowel een zwaard als een dolk. Je kunt ze in combinatie gebruiken.')
+
+else:
+    print('Helaas is de zombie te sterk voor je.')
+    print('Game over.')
+    exit()
+
+print('')
+time.sleep(1)
+dekamerkeuze = input('Wil je door naar kamer 3? (ja/nee)')
 
 
 if dekamerkeuze == "nee" or links_of_rechtdoor == "rechtdoor":
