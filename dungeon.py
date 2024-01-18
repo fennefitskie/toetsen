@@ -9,14 +9,14 @@ sleutel_schatkist = ''
 dekamerkeuze = ''
 item = ''
 
-# === [kamer 1] === #
+print("# === [kamer 1] === #")
 print('Door de twee grote deuren loop je een gang binnen.')
 print('Het ruikt hier muf en vochtig.')
 print('Je ziet een deur voor je.')
 print('')
 time.sleep(1)
 
-# === [kamer 7] === #
+print("# === [kamer 7] === #")
 print('Je stapt door de deur.')
 
 geen_rupee = input('Kies een getal tussen de 1 en de 10: ')
@@ -32,7 +32,7 @@ time.sleep(1)
 
 rechts_of_rechtdoor = input('Wil je rechts of rechtdoor? ')
 
-# === [kamer 2] === #
+print("# === [kamer 2] === #")
 if rechts_of_rechtdoor == "rechts":
     print('Je stapt door de deur heen en je ziet een standbeeld voor je.')
     print('Het standbeeld heeft een rupee vast.')
@@ -55,7 +55,7 @@ if rechts_of_rechtdoor == "rechts":
     print('')
     time.sleep(1)
 
-# === [kamer 6] === #
+print("# === [kamer 6] === #")
 if rechts_of_rechtdoor == "rechts":
     zombie_attack = 1
     zombie_defense = 0
@@ -83,49 +83,45 @@ if rechts_of_rechtdoor == "rechts":
     time.sleep(1)
     dekamerkeuze = input('Wil je door naar kamer 3? (ja/nee)')
 
-# === [kamer 8] === #
-if rechts_of_rechtdoor == "rechtdoor":
-    if item == '':
-        item = "niks"
-    if dekamerkeuze == "nee":
-        dekamerkeuze = "kamer 3"
-        print('Je loopt verder door de gang en komt in een lange kamer.')
-        print('Aan het einde van de kamer zie je een glinsterende gokmachine.')
+print("# === [kamer 8] === #")
+if dekamerkeuze == "nee" or rechts_of_rechtdoor == "rechtdoor":
+    dekamerkeuze = "kamer 3"
+    print('Je loopt verder door de gang en komt in een lange kamer.')
+    print('Aan het einde van de kamer zie je een glinsterende gokmachine.')
 
-        gokmachine_gebruiken = input('Wil je de gokmachine gebruiken? (ja/nee) ')
+    gokmachine_gebruiken = input('Wil je de gokmachine gebruiken? (ja/nee) ')
 
-        if gokmachine_gebruiken.lower() == "ja":
-            print('Je gooit de dobbelstenen...')
-            dobbelsteen1 = random.randint(1, 6)
-            dobbelsteen2 = random.randint(1, 6)
-            totaal = dobbelsteen1 + dobbelsteen2
+    if gokmachine_gebruiken.lower() == "ja":
+        print('Je gooit de dobbelstenen...')
+        dobbelsteen1 = random.randint(1, 6)
+        dobbelsteen2 = random.randint(1, 6)
+        totaal = dobbelsteen1 + dobbelsteen2
 
-            print(f'Je dobbelstenen tonen {dobbelsteen1} en {dobbelsteen2}. Totaal: {totaal}')
+        print(f'Je dobbelstenen tonen {dobbelsteen1} en {dobbelsteen2}. Totaal: {totaal}')
 
-            if totaal > 7:
-                aantal_rupee *= 2
-                print(f'Gefeliciteerd! Je hebt gewonnen en het aantal rupees is verdubbeld. Je hebt nu {aantal_rupee} rupees.')
-            elif totaal < 7:
-                player_health -= 1
-                print(f'Helaas, je hebt verloren. Je verliest 1 health. Je hebt nu {player_health} health.')
-                if player_health <= 0:
-                    print('Je health is nu 0. Game over.')
-                    exit()
-            else:
-                aantal_rupee *= 2
-                player_health -= 1
-                print(f'Je hebt zowel gewonnen als verloren. Het aantal rupees is verdubbeld, maar je verliest ook 1 health. Je hebt nu {aantal_rupee} rupees en {player_health} health.')
+        if totaal > 7:
+            aantal_rupee *= 2
+            print(f'Gefeliciteerd! Je hebt gewonnen en het aantal rupees is verdubbeld. Je hebt nu {aantal_rupee} rupees.')
+        elif totaal < 7:
+            player_health -= 1
+            print(f'Helaas, je hebt verloren. Je verliest 1 health. Je hebt nu {player_health} health.')
+            if player_health <= 0:
+                print('Je health is nu 0. Game over.')
+                exit()
         else:
-            print('Je besluit de gokmachine niet te gebruiken en kijkt rond in de kamer.')
-            print('Je ziet een volgende deur.')
+            aantal_rupee *= 2
+            player_health -= 1
+            print(f'Je hebt zowel gewonnen als verloren. Het aantal rupees is verdubbeld, maar je verliest ook 1 health. Je hebt nu {aantal_rupee} rupees en {player_health} health.')
+    else:
+        print('Je besluit de gokmachine niet te gebruiken en kijkt rond in de kamer.')
+        print('Je ziet een volgende deur.')
 
-        dekamerkeuze = input('Wil je door naar kamer 3? (ja/nee)')
-        
+    dekamerkeuze = input('Wil je door naar kamer 3? (ja/nee)')
 
 print('')
 time.sleep(1)
 
-# === [kamer 9] === #
+print("# === [kamer 9] === #")
 if dekamerkeuze == "nee":
     print('Je opent de deur en loopt naar binnen.')
     betovering = random.choice(["defense", "health"])
@@ -139,13 +135,16 @@ if dekamerkeuze == "nee":
 
     print('Je voelt de betovering en vervolgt je avontuur in de kamer.')
 
+    kamer9klaar = "ja"
+
+
 print('')
 time.sleep(1)
 
 
 
-# === [kamer 3] === #
-if dekamerkeuze == "ja":
+print("# === [kamer 3] === #")
+if dekamerkeuze == "ja" or kamer9klaar == "ja":
     print('Je duwt hem open en stapt een hele lange kamer binnen.')
     print(f'Je hebt {aantal_rupee} rupee.')
     if aantal_rupee == 1:
@@ -195,6 +194,47 @@ if dekamerkeuze == "ja":
                 aantal_rupee = 0
                 player_defense += 1
                 sleutel_schatkist = "ja"
+    if aantal_rupee >= 3:
+        item_antwoord = input('Wil je met de rupees een zwaard, een schild en een sleutel kopen? (ja/nee) ')
+        if item_antwoord == "ja":
+            item = "zwaard en schild"
+            aantal_rupee = 0
+            player_attack += 2
+            player_defense += 1
+            sleutel_schatkist = "ja"
+        elif item_antwoord == "nee":
+            item_antwoord = input('Wil je met de twee rupees een zwaard en een schild kopen? (ja/nee/andere optie) ')
+            if item_antwoord == "ja":
+                item = "zwaard en schild"
+                aantal_rupee = 0
+                player_attack += 2
+                player_defense += 1
+            elif item_antwoord == "nee":
+                item_antwoord = input('Wil je met de rupee een zwaard (1) of een schild (2) of een sleutel (3) kopen? ')
+                if item_antwoord == "1":
+                        item = "zwaard"
+                        aantal_rupee = 0
+                        player_attack += 2
+                elif item_antwoord == "2":
+                    item = "schild"
+                    aantal_rupee = 0
+                    player_defense += 1
+                elif item_antwoord == "3":
+                    item = "niks"
+                    sleutel_schatkist = "ja"
+                    aantal_rupee = 0
+            elif item_antwoord == "andere optie":
+                item_antwoord = input('Wil je met de twee rupees een zwaard en een sleutel (1) of een schild en sleutel (2) kopen? ')
+                if item_antwoord == "1":
+                    item = "zwaard"
+                    aantal_rupee = 0
+                    player_attack += 2
+                    sleutel_schatkist = "ja"
+                elif item_antwoord == "2":
+                    item = "schild"
+                    aantal_rupee = 0
+                    player_defense += 1
+                    sleutel_schatkist = "ja"
 
     elif rechts_of_rechtdoor == "rechtdoor":
         dekamerkeuze = "kamer 3"
@@ -212,7 +252,7 @@ if dekamerkeuze == "ja":
     print('')
     time.sleep(1)
 
-# === [kamer 4] === #
+print("# === [kamer 4] === #")
 vijand_attack = 2
 vijand_defense = 0
 vijand_health = 3
@@ -241,18 +281,18 @@ else:
 print('')
 time.sleep(1)
 
-# === [kamer 10] === #
+print("# === [kamer 10] === #")
 dungeonboss_attack = 3
 dungeonboss_defence = 1
 dungeonboss_health = 5
 
-dungeonboss_hit_damage = (dungeonboss_attack - player_defense)
-if vijand_hit_damage <= 0:
+dungeonboss_hit_damage = max(0, dungeonboss_attack - player_defense)  # Gebruik max(0, ...) om negatieve waarden te vermijden
+if dungeonboss_hit_damage <= 0:
     print('Jij hebt een te goede verdediging voor de dungeonboss, hij kan je geen schade doen.')
 else:
     dungeonboss_attack_amount = math.floor(player_health / dungeonboss_hit_damage)
 
-    player_hit_damage = (player_attack - dungeonboss_defence)
+    player_hit_damage = max(0, player_attack - dungeonboss_defence)  # Gebruik max(0, ...) om negatieve waarden te vermijden
     player_attack_amount = math.floor(dungeonboss_health / player_hit_damage)
 
     if player_attack_amount < dungeonboss_attack_amount:
@@ -268,7 +308,7 @@ else:
 print('')
 time.sleep(1)
 
-# === [kamer 5] === #
+print("# === [kamer 5] === #")
 print('Voorzichtig open je de deur, je wilt niet nog een zombie tegenkomen.')
 print('Tot je verbazing zie je een schatkist in het midden van de kamer staan.')
 if sleutel_schatkist == "ja":
