@@ -146,9 +146,6 @@ if dekamerkeuze == "nee":
 print('')
 time.sleep(1)
 
-
-
-
 if dekamerkeuze == "ja" or kamer9klaar == "ja":
     print("# === [kamer 3] === #")
     print('Je duwt hem open en stapt een hele lange kamer binnen.')
@@ -245,8 +242,6 @@ if dekamerkeuze == "ja" or kamer9klaar == "ja":
     elif rechts_of_rechtdoor == "rechtdoor":
         dekamerkeuze = "kamer 3"
            
-        
-
     elif dekamerkeuze == 'kamer 3':
         if item == "zwaard" or item == "schild" or item == "zwaard en schild":
             print(f'In deze kamer staat een tafel met daarop een {item}.')
@@ -259,7 +254,6 @@ if dekamerkeuze == "ja" or kamer9klaar == "ja":
     rechts_of_rechtdoor = input('Wil je door naar kamer 4? (ja/nee) ') 
     print('')
     time.sleep(1)
-
 
 if rechts_of_rechtdoor == "ja":
     print("# === [kamer 4] === #")
@@ -288,8 +282,19 @@ if rechts_of_rechtdoor == "ja":
             print('Helaas is de vijand te sterk voor je.')
             print('Game over.')
             exit()
+    rechts_of_rechtdoor = input('Wil je rechts of rechtdoor? ')
     print('')
     time.sleep(1)
+
+
+if rechts_of_rechtdoor == "rechts":
+    print("# === [kamer 12] === #")
+    print('Je opent de deur.')
+    print('Uh oh, je bent in de put gevallen')
+    print('Game over.')
+    exit()
+print('')
+time.sleep(1)
 
 print("# === [kamer 11] === #")
 print('Je opent de deur en stapt naar binnen.')
@@ -309,13 +314,13 @@ dungeonboss_attack = 3
 dungeonboss_defence = 1
 dungeonboss_health = 5
 
-dungeonboss_hit_damage = max(0, dungeonboss_attack - player_defense)  # Gebruik max(0, ...) om negatieve waarden te vermijden
+dungeonboss_hit_damage = max(0, dungeonboss_attack - player_defense) 
 if dungeonboss_hit_damage <= 0:
     print('Jij hebt een te goede verdediging voor de dungeonboss, hij kan je geen schade doen.')
 else:
     dungeonboss_attack_amount = math.floor(player_health / dungeonboss_hit_damage)
 
-    player_hit_damage = max(0, player_attack - dungeonboss_defence)  # Gebruik max(0, ...) om negatieve waarden te vermijden
+    player_hit_damage = max(0, player_attack - dungeonboss_defence) 
     player_attack_amount = math.floor(dungeonboss_health / player_hit_damage)
 
     if player_attack_amount < dungeonboss_attack_amount:
