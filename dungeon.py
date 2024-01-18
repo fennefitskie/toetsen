@@ -32,7 +32,6 @@ time.sleep(1)
 
 rechts_of_rechtdoor = input('Wil je rechts of rechtdoor? ')
 
-
 # === [kamer 2] === #
 if rechts_of_rechtdoor == "rechts":
     print('Je stapt door de deur heen en je ziet een standbeeld voor je.')
@@ -84,9 +83,10 @@ if rechts_of_rechtdoor == "rechts":
     time.sleep(1)
     dekamerkeuze = input('Wil je door naar kamer 3? (ja/nee)')
 
-
 # === [kamer 8] === #
-elif rechts_of_rechtdoor == "rechtdoor":
+if rechts_of_rechtdoor == "rechtdoor":
+    if item == '':
+        item = "niks"
     if dekamerkeuze == "nee":
         dekamerkeuze = "kamer 3"
         print('Je loopt verder door de gang en komt in een lange kamer.')
@@ -205,9 +205,9 @@ if dekamerkeuze == "ja":
             print(f'In deze kamer staat een tafel met daarop een {item}.')
             print(f'Je pakt het {item} op en houdt het bij je.')
             print('Op naar de volgende deur.')
-        if item == "niks":
-            print(f'In deze kamer staat een tafel met helaas {item} er op')
-            print('Op naar de volgende deur.')
+    if item == "niks":
+        print(f'In deze kamer staat een tafel met helaas {item} er op')
+        print('Op naar de volgende deur.')
 
     print('')
     time.sleep(1)
@@ -236,6 +236,33 @@ else:
             exit()
     else:
         print('Helaas is de vijand te sterk voor je.')
+        print('Game over.')
+        exit()
+print('')
+time.sleep(1)
+
+# === [kamer 10] === #
+dungeonboss_attack = 3
+dungeonboss_defence = 1
+dungeonboss_health = 5
+
+dungeonboss_hit_damage = (dungeonboss_attack - player_defense)
+if vijand_hit_damage <= 0:
+    print('Jij hebt een te goede verdediging voor de dungeonboss, hij kan je geen schade doen.')
+else:
+    dungeonboss_attack_amount = math.floor(player_health / dungeonboss_hit_damage)
+
+    player_hit_damage = (player_attack - dungeonboss_defence)
+    player_attack_amount = math.floor(dungeonboss_health / player_hit_damage)
+
+    if player_attack_amount < dungeonboss_attack_amount:
+        print(f'In {player_attack_amount} rondes versla je de dungeonboss.')
+        print(f'Je health is nu {player_health}.')
+        if player_health <= 0:
+            print('Game over.')
+            exit()
+    else:
+        print('Helaas de dungeonboss is te sterk voor je.')
         print('Game over.')
         exit()
 print('')
