@@ -8,6 +8,7 @@ aantal_rupee = 0
 sleutel_schatkist = ''
 dekamerkeuze = ''
 item = ''
+kamer9klaar = ''
 
 print("# === [kamer 1] === #")
 print('Door de twee grote deuren loop je een gang binnen.')
@@ -32,8 +33,9 @@ time.sleep(1)
 
 rechts_of_rechtdoor = input('Wil je rechts of rechtdoor? ')
 
-print("# === [kamer 2] === #")
+
 if rechts_of_rechtdoor == "rechts":
+    print("# === [kamer 2] === #")
     print('Je stapt door de deur heen en je ziet een standbeeld voor je.')
     print('Het standbeeld heeft een rupee vast.')
     print('Op zijn borst zit een numpad met de toetsen 9 t/m 0.')
@@ -55,8 +57,9 @@ if rechts_of_rechtdoor == "rechts":
     print('')
     time.sleep(1)
 
-print("# === [kamer 6] === #")
-if rechts_of_rechtdoor == "rechts":
+
+if rechts_of_rechtdoor2 == "rechts":
+    print("# === [kamer 6] === #")
     zombie_attack = 1
     zombie_defense = 0
     zombie_health = 2
@@ -83,9 +86,10 @@ if rechts_of_rechtdoor == "rechts":
     time.sleep(1)
     dekamerkeuze = input('Wil je door naar kamer 3? (ja/nee)')
 
-print("# === [kamer 8] === #")
-if dekamerkeuze == "nee" or rechts_of_rechtdoor == "rechtdoor":
+
+if dekamerkeuze == "nee" or rechts_of_rechtdoor2 == "rechtdoor":
     dekamerkeuze = "kamer 3"
+    print("# === [kamer 8] === #")
     print('Je loopt verder door de gang en komt in een lange kamer.')
     print('Aan het einde van de kamer zie je een glinsterende gokmachine.')
 
@@ -121,8 +125,9 @@ if dekamerkeuze == "nee" or rechts_of_rechtdoor == "rechtdoor":
 print('')
 time.sleep(1)
 
-print("# === [kamer 9] === #")
+
 if dekamerkeuze == "nee":
+    print("# === [kamer 9] === #")
     print('Je opent de deur en loopt naar binnen.')
     betovering = random.choice(["defense", "health"])
 
@@ -143,8 +148,9 @@ time.sleep(1)
 
 
 
-print("# === [kamer 3] === #")
+
 if dekamerkeuze == "ja" or kamer9klaar == "ja":
+    print("# === [kamer 3] === #")
     print('Je duwt hem open en stapt een hele lange kamer binnen.')
     print(f'Je hebt {aantal_rupee} rupee.')
     if aantal_rupee == 1:
@@ -238,6 +244,7 @@ if dekamerkeuze == "ja" or kamer9klaar == "ja":
 
     elif rechts_of_rechtdoor == "rechtdoor":
         dekamerkeuze = "kamer 3"
+           
         
 
     elif dekamerkeuze == 'kamer 3':
@@ -248,36 +255,52 @@ if dekamerkeuze == "ja" or kamer9klaar == "ja":
     if item == "niks":
         print(f'In deze kamer staat een tafel met helaas {item} er op')
         print('Op naar de volgende deur.')
-
+    
+    rechts_of_rechtdoor = input('Wil je door naar kamer 4? (ja/nee) ') 
     print('')
     time.sleep(1)
 
-print("# === [kamer 4] === #")
-vijand_attack = 2
-vijand_defense = 0
-vijand_health = 3
-print(f'Dapper met je nieuwe {item} loop je de kamer binnen.')
-print('Je loopt tegen de vijand aan.')
 
-vijand_hit_damage = (vijand_attack - player_defense)
-if vijand_hit_damage <= 0:
-    print('Jij hebt een te goede verdediging voor de vijand, hij kan je geen schade doen.')
-else:
-    vijand_attack_amount = math.floor(player_health / vijand_hit_damage)
+if rechts_of_rechtdoor == "ja":
+    print("# === [kamer 4] === #")
+    vijand_attack = 2
+    vijand_defense = 0
+    vijand_health = 3
+    print(f'Dapper met je nieuwe {item} loop je de kamer binnen.')
+    print('Je loopt tegen de vijand aan.')
 
-    player_hit_damage = (player_attack - vijand_defense)
-    player_attack_amount = math.floor(vijand_health / player_hit_damage)
+    vijand_hit_damage = (vijand_attack - player_defense)
+    if vijand_hit_damage <= 0:
+        print('Jij hebt een te goede verdediging voor de vijand, hij kan je geen schade doen.')
+    else:
+        vijand_attack_amount = math.floor(player_health / vijand_hit_damage)
 
-    if player_attack_amount < vijand_attack_amount:
-        print(f'In {player_attack_amount} rondes versla je de vijand.')
-        print(f'Je health is nu {player_health}.')
-        if player_health <= 0:
+        player_hit_damage = (player_attack - vijand_defense)
+        player_attack_amount = math.floor(vijand_health / player_hit_damage)
+
+        if player_attack_amount < vijand_attack_amount:
+            print(f'In {player_attack_amount} rondes versla je de vijand.')
+            print(f'Je health is nu {player_health}.')
+            if player_health <= 0:
+                print('Game over.')
+                exit()
+        else:
+            print('Helaas is de vijand te sterk voor je.')
             print('Game over.')
             exit()
-    else:
-        print('Helaas is de vijand te sterk voor je.')
-        print('Game over.')
-        exit()
+    print('')
+    time.sleep(1)
+
+print("# === [kamer 11] === #")
+print('Je opent de deur en stapt naar binnen.')
+print('Je ziet allemaal pijlen die vanuit de muur schieten.')
+if item == "schild" or "zwaard en schild":
+    print('Gelukkig had jij een zwaard waardoor je het heelhuids hebt overleefd.')
+    print('Loop snel maar naar de volgende deur.')
+elif item != "schild" or "zwaard en schild":
+    print('Helaas je hebt geen schild waardoor je geraakt ben door de pijlen.')
+    print('Game over.')
+    exit()
 print('')
 time.sleep(1)
 
