@@ -11,6 +11,8 @@ item = ''
 kamer9klaar = ''
 bom = ''
 rechts_of_rechtdoor = ''
+sleutelvoordeur10 = ''
+kamer4klaar = ''
 
 print("# === [kamer 1] === #")
 print('Door de twee grote deuren loop je een gang binnen.')
@@ -27,7 +29,7 @@ geen_rupee_optie = random.randint(1, 10)
 if geen_rupee == geen_rupee_optie:
     print('Helaas, de rupee is al meegenomen door iemand anders.')
     aantal_rupee = 0
-elif  geen_rupee != geen_rupee_optie:
+elif geen_rupee != geen_rupee_optie:
     print('Je ziet een rupee liggen en pakt het.')
     aantal_rupee = 1
 print('')
@@ -90,14 +92,14 @@ if links_of_rechtdoor == "links":
             if item == 'zwaard':
                 print('Je hebt nu zowel een zwaard als een dolk. Je kunt ze in combinatie gebruiken.')
 
-else:
-    print('Helaas is de zombie te sterk voor je.')
-    print('Game over.')
-    exit()
-
+        else:
+            print('Helaas is de zombie te sterk voor je.')
+            print('Game over.')
+            exit()
+    dekamerkeuze = input('Wil je door naar kamer 3? (ja/nee)')
 print('')
 time.sleep(1)
-dekamerkeuze = input('Wil je door naar kamer 3? (ja/nee)')
+
 
 
 if dekamerkeuze == "nee" or links_of_rechtdoor == "rechtdoor":
@@ -134,12 +136,21 @@ if dekamerkeuze == "nee" or links_of_rechtdoor == "rechtdoor":
         print('Je ziet een volgende deur.')
 
     dekamerkeuze = input('Wil je door naar kamer 3? (ja/nee)')
+    if dekamerkeuze == "nee":
+        rechts_of_rechtdoor = input('Wil je rechts of rechtdoor?')
 
 print('')
 time.sleep(1)
 
 
-if dekamerkeuze == "nee":
+if rechts_of_rechtdoor == "rechts":
+    print("# === [kamer 14] === #")
+    sleutelvoordeur10 = "ja"
+    print('Je hebt de sleutel gevonden om kamer 10 te openen!')
+    print('')
+    time.sleep(1)
+
+if rechts_of_rechtdoor == "rechtdoor":
     print("# === [kamer 9] === #")
     print('Je opent de deur en loopt naar binnen.')
     betovering = random.choice(["defense", "health"])
@@ -300,10 +311,11 @@ if rechts_of_rechtdoor == "ja" or links_of_rechtdoor == "rechtdoor":
             print('Game over.')
             exit()
     rechts_of_rechtdoor = input('Wil je rechts of rechtdoor? ')
+    kamer4klaar = "ja"
     print('')
     time.sleep(1)
 
-if bom == "ja":
+if kamer4klaar == "ja" and bom == "ja":
     print("# === [kamer 13] === #")
     print('Je ziet een zwaard liggen en pakt hem op.')
     item = "zwaard"
@@ -331,30 +343,31 @@ elif item != "schild" or "bom en schild":
 print('')
 time.sleep(1)
 
-print("# === [kamer 10] === #")
-dungeonboss_attack = 3
-dungeonboss_defense = 1
-dungeonboss_health = 5
+if sleutelvoordeur10 == "ja" or bom == "ja":
+    print("# === [kamer 10] === #")
+    dungeonboss_attack = 3
+    dungeonboss_defense = 1
+    dungeonboss_health = 5
 
-dungeonboss_hit_damage = max(1, dungeonboss_attack - player_defense) 
-if dungeonboss_hit_damage <= 0:
-    print('Jij hebt een te goede verdediging voor de dungeonboss, hij kan je geen schade doen.')
-else:
-    player_hit_damage = max(1, player_attack - dungeonboss_defense)  # Zorg ervoor dat player_hit_damage niet nul is
-    dungeonboss_attack_amount = math.floor(player_health / dungeonboss_hit_damage)
+    dungeonboss_hit_damage = max(1, dungeonboss_attack - player_defense) 
+    if dungeonboss_hit_damage <= 0:
+        print('Jij hebt een te goede verdediging voor de dungeonboss, hij kan je geen schade doen.')
+    else:
+        player_hit_damage = max(1, player_attack - dungeonboss_defense)  # Zorg ervoor dat player_hit_damage niet nul is
+        dungeonboss_attack_amount = math.floor(player_health / dungeonboss_hit_damage)
 
-    player_attack_amount = max(1, math.floor(dungeonboss_health / player_hit_damage))  # Zorg ervoor dat player_hit_damage niet nul is
-    
-    if player_attack_amount < dungeonboss_attack_amount:
-        print(f'In {player_attack_amount} rondes versla je de dungeonboss.')
-        print(f'Je health is nu {player_health}.')
-        if player_health <= 0:
+        player_attack_amount = max(1, math.floor(dungeonboss_health / player_hit_damage))  # Zorg ervoor dat player_hit_damage niet nul is
+        
+        if player_attack_amount < dungeonboss_attack_amount:
+            print(f'In {player_attack_amount} rondes versla je de dungeonboss.')
+            print(f'Je health is nu {player_health}.')
+            if player_health <= 0:
+                print('Game over.')
+                exit()
+        else:
+            print('Helaas de dungeonboss is te sterk voor je.')
             print('Game over.')
             exit()
-    else:
-        print('Helaas de dungeonboss is te sterk voor je.')
-        print('Game over.')
-        exit()
 print('')
 time.sleep(1)
 
