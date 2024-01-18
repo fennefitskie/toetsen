@@ -18,8 +18,15 @@ time.sleep(1)
 
 # === [kamer 7] === #
 print('Je stapt door de deur.')
-print('Je ziet een rupee liggen en pakt het.')
-aantal_rupee = 1
+
+geen_rupee = input('Kies een getal tussen de 1 en de 10: ')
+geen_rupee_optie = random.randint(1, 10)
+if geen_rupee == geen_rupee_optie:
+    print('Helaas, de rupee is al meegenomen door iemand anders.')
+    aantal_rupee = 0
+elif  geen_rupee != geen_rupee_optie:
+    print('Je ziet een rupee liggen en pakt het.')
+    aantal_rupee = 1
 print('')
 time.sleep(1)
 
@@ -105,9 +112,29 @@ elif rechts_of_rechtdoor == "rechtdoor":
             print(f'Je hebt zowel gewonnen als verloren. Het aantal rupees is verdubbeld, maar je verliest ook 1 health. Je hebt nu {aantal_rupee} rupees en {player_health} health.')
     else:
         print('Je besluit de gokmachine niet te gebruiken en kijkt rond in de kamer.')
+        print('Je ziet een volgende deur.')
 
     print('')
     time.sleep(1)
+
+# === [kamer 9] === #
+print('Je opent de deur en loopt naar binnen.')
+
+
+betovering = random.choice(["defense", "health"])
+
+if betovering == "defense":
+    player_defense += 1
+    print('Je voelt een beschermende betovering om je heen. Je krijgt 1 verdedigingspunt erbij!')
+elif betovering == "health":
+    player_health += 2
+    print('Een helende betovering omringt je. Je krijgt 2 extra gezondheidspunten!')
+
+print('Je voelt de betovering en vervolgt je avontuur in de kamer.')
+
+print('')
+time.sleep(1)
+
 
 
 # === [kamer 3] === #
@@ -128,7 +155,7 @@ if aantal_rupee == 1:
          aantal_rupee = 0
          sleutel_schatkist = "ja"
 if aantal_rupee == 2:
-    item_antwoord = ('Wil je met de twee rupees een zwaard en een schild kopen? (ja/nee/andere optie) ')
+    item_antwoord = input('Wil je met de twee rupees een zwaard en een schild kopen? (ja/nee/andere optie) ')
     if item_antwoord == "ja":
         item = "zwaard en schild"
         aantal_rupee = 0
@@ -160,20 +187,13 @@ if aantal_rupee == 2:
             aantal_rupee = 0
             player_defense += 1
             sleutel_schatkist = "ja"
-if aantal_rupee == 0:
-    aantal_rupee = 0
-    item = "niks"
-
-
-
-              
 
 elif rechts_of_rechtdoor == "rechtdoor":
     dekamerkeuze = "kamer 3"
     
 
 elif dekamerkeuze == 'kamer 3':
-    if item_antwoord == 1 or item_antwoord == 2 or item_antwoord == 3 or item_antwoord == "ja" or item_antwoord == "nee" or item_antwoord == "andere optie":
+    if item == "zwaard" or item == "schild" or item == "zwaard en schild":
         print(f'In deze kamer staat een tafel met daarop een {item}.')
         print(f'Je pakt het {item} op en houdt het bij je.')
         print('Op naar de volgende deur.')
