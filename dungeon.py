@@ -179,7 +179,7 @@ if rechts_of_rechtdoor2 == "rechtdoor" or kamer14klaar == "ja":
 print('')
 time.sleep(1)
 
-if balista_gebruiken == "nee" or balista_gebruiken == '':
+if balista_gebruiken == '':
     if links_rechts_of_rechtdoor == "rechtdoor" or links_of_rechtdoor == "links" or dekamerkeuze == "ja":
         print("# === [kamer 3] === #")
         print('Je duwt hem open en stapt een hele lange kamer binnen.')
@@ -363,39 +363,46 @@ if kamer13klaar != "ja":
         print('')
         time.sleep(1)
 
-if kamer14klaar == "ja" or bom == "ja":
-    if rechts_of_rechtdoor2 == "rechtdoor":
-        print("# === [kamer 10] === #")
-        dungeonboss_attack = 3
-        dungeonboss_defense = 1
-        dungeonboss_health = 5
+if balista_gebruiken == "nee" or balista_gebruiken == '':
+    if kamer14klaar == "ja" or bom == "ja":
+        if rechts_of_rechtdoor2 == "rechtdoor":
+            print("# === [kamer 10] === #")
+            dungeonboss_attack = 3
+            dungeonboss_defense = 1
+            dungeonboss_health = 5
 
-        dungeonboss_hit_damage = max(1, dungeonboss_attack - player_defense) 
-        if dungeonboss_hit_damage <= 0:
-            print('Jij hebt een te goede verdediging voor de dungeonboss, hij kan je geen schade doen.')
-        else:
-            player_hit_damage = max(1, player_attack - dungeonboss_defense)  # Zorg ervoor dat player_hit_damage niet nul is
-            dungeonboss_attack_amount = math.floor(player_health / dungeonboss_hit_damage)
+            dungeonboss_hit_damage = max(1, dungeonboss_attack - player_defense) 
+            if dungeonboss_hit_damage <= 0:
+                print('Jij hebt een te goede verdediging voor de dungeonboss, hij kan je geen schade doen.')
+            else:
+                player_hit_damage = max(1, player_attack - dungeonboss_defense)  # Zorg ervoor dat player_hit_damage niet nul is
+                dungeonboss_attack_amount = math.floor(player_health / dungeonboss_hit_damage)
 
-            player_attack_amount = max(1, math.floor(dungeonboss_health / player_hit_damage))  # Zorg ervoor dat player_hit_damage niet nul is
-                
-            if player_attack_amount < dungeonboss_attack_amount:
-                print(f'In {player_attack_amount} rondes versla je de dungeonboss.')
-                print(f'Je health is nu {player_health}.')
-                if player_health <= 0:
+                player_attack_amount = max(1, math.floor(dungeonboss_health / player_hit_damage))  # Zorg ervoor dat player_hit_damage niet nul is
+                    
+                if player_attack_amount < dungeonboss_attack_amount:
+                    print(f'In {player_attack_amount} rondes versla je de dungeonboss.')
+                    print(f'Je health is nu {player_health}.')
+                    if player_health <= 0:
+                        print('Game over.')
+                        exit()
+                else:
+                    print('Helaas de dungeonboss is te sterk voor je.')
                     print('Game over.')
                     exit()
-            else:
-                print('Helaas de dungeonboss is te sterk voor je.')
-                print('Game over.')
-                exit()
-    else:
+
+    if kamer14klaar != "ja" or bom != "ja":
         print('Helaas je hebt geen sleutel om door te gaan.')
         print('Game over.')
         exit()
 
-    print('')
-    time.sleep(1)
+if balista_gebruiken == "ja":
+    print("# === [kamer 10] === #")
+    print('Gefeliciteerd, je hebt de dungeonboss verslagen met de balista')
+    print('Ga snel maar door naar de volgende deur.')
+
+print('')
+time.sleep(1)
 
 if balista_gebruiken == "ja":
     print("# === [kamer 5] === #")
